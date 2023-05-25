@@ -19,8 +19,7 @@ const inputSchema =  new mongoose.Schema({
 type: Number,
     },
     dueDate:{
-        type:Date,
-        default:Date.now()
+        type:String
     },
 })
 

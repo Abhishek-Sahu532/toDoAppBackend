@@ -18,7 +18,6 @@ app.get("/api/todo", async (req, res) => {
   } catch (e) {
     console.log(e);
     return res.status(404).send(e);
-    
   }
 });
 
@@ -37,13 +36,17 @@ app.get("/api/todo/:id", async (req, res) => {
 //ENDPOINT TO ADD A NEW TODO INTO THE DATABASE //WORKING
 app.post("/api/todo", async (req, res) => {
   const newtodo = await new todoschema(req.body);
+  if(!req.body.title){
+    return res.status(404).json({
+      err: 'Title is missing'
+    })
+  }
   try {
     await newtodo.save();
    return res.status(201).send(newtodo);
   } catch (e) {
     console.log(e);
   return  res.status(400).send(e);
-    
   }
 });
 
